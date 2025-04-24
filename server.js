@@ -90,16 +90,19 @@ app.post('/movies', (req, resp) => {
         fetch(url, options)
           .then(res => res.json())
           .then(res => {
+            console.log(res);
             const services = ['Tubi TV', 'Pluto TV', 'Max', 'Mubi', 'Criterion Channel', 'Netflix', 'Paramount Plus', 'Kanopy', 'MUBI', 'Amazon Prime Video'];
             const streaming = [];
-            if (res.results.US.ads){
-              res.results.US.ads.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
-            }
-            if (res.results.US.flatrate){
-              res.results.US.flatrate.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
-            }
-            if (res.results.US.free){
-              res.results.US.free.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
+            if (res.results.US){
+              if (res.results.US.ads){
+                res.results.US.ads.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
+              }
+              if (res.results.US.flatrate){
+                res.results.US.flatrate.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
+              }
+              if (res.results.US.free){
+                res.results.US.free.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
+              }
             }
 
             const filmToAdd = new Movie({
@@ -110,6 +113,8 @@ app.post('/movies', (req, resp) => {
               watched: req.body.watchedFilm,
               streaming: streaming
             });
+
+            console.log(filmToAdd);
 
             const addFilm = async (film) => {
               const result = await film.save();
