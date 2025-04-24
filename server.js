@@ -57,6 +57,77 @@ app.post('/', (req, resp) => {
   const response = apiResponse(title);
 });
 
+app.post('/movies', (req, resp) => {
+  const title = req.body.title;
+  const year = req.body.year;
+  const imdbID = req.body.imdbID;
+
+  const url = `https://api.themoviedb.org/3/find/${imdbID}?external_source=imdb_id`;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjY2M4NjMwNDM4N2NmNTI2NGY2ZTQ0NTcyNGJlOTQ0ZCIsIm5iZiI6MTY2Mzg2OTg1Ny41NjQsInN1YiI6IjYzMmNhM2ExYzJmNDRiMDA3ZTE0ZmMyZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4uMclJNWykMdDgQRrPQTSn0qAcMYdS2X9pTpoVTwnCw'
+    }
+  };
+  
+    
+    fetch(url, options)
+      .then(res => res.json())
+      .then(res => {
+        const movie = res.movie_results[0];
+    
+        const url = `https://api.themoviedb.org/3/movie/${movie.id}/watch/providers`;
+
+        const options = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjY2M4NjMwNDM4N2NmNTI2NGY2ZTQ0NTcyNGJlOTQ0ZCIsIm5iZiI6MTY2Mzg2OTg1Ny41NjQsInN1YiI6IjYzMmNhM2ExYzJmNDRiMDA3ZTE0ZmMyZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4uMclJNWykMdDgQRrPQTSn0qAcMYdS2X9pTpoVTwnCw'
+          }
+        };
+    
+        fetch(url, options)
+          .then(res => res.json())
+          .then(res => {
+            const services = ['Tubi TV', 'Pluto TV', 'Max', 'Mubi', 'Criterion Channel', 'Netflix', 'Paramount Plus', 'Kanopy', 'MUBI', 'Amazon Prime Video'];
+            const streaming = [];
+            if (res.results.US.ads){
+              res.results.US.ads.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
+            }
+            if (res.results.US.flatrate){
+              res.results.US.flatrate.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
+            }
+            if (res.results.US.free){
+              res.results.US.free.forEach(item => services.includes(item.provider_name) ? streaming.push(item.provider_name) : streaming);
+            }
+
+            const filmToAdd = new Movie({
+              title: req.body.title,
+              director: req.body.director,
+              year: req.body.year,
+              runTime: req.body.runtime,
+              watched: req.body.watchedFilm,
+              streaming: streaming
+            });
+
+            const addFilm = async (film) => {
+              const result = await film.save();
+              return result;
+            }
+
+            try {
+              addFilm(filmToAdd);
+              resp.redirect('/movies');
+            } catch (e) {
+              console.log(e);
+            }
+          })
+          .catch(err => console.error(err));
+      })
+      .catch(err => console.error(err));
+});
+
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`);
 });
