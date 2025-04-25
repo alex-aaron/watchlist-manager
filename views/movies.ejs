@@ -25,8 +25,32 @@
     <div class="header">
       <h1 id='title'>Movies</h1>
     </div>
-
+    <div class="container movies-container">
+      <div class="card">
+        <table class="table table-striped">
+          <thead>
+            <th scope="col">Title</th>
+            <th scope="col">Director</th>
+            <th scope="col">Year</th>
+            <th scope="col">Runtime</th>
+            <th scope="col">Watched</th>
+          </thead>
+          <tbody>
+            <% movies.forEach(function(movie){ %>
+              <tr>
+                <th scope="row"><%= movie.title %></th>
+                <th><%= movie.director %></th>
+                <th><%= movie.year %></th>
+                <th><%= movie.runTime %></th>
+                <th><%= movie.watched %></th>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
     
     
   </body>
 </html>
+

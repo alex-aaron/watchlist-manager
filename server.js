@@ -27,7 +27,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.render('movies');
+  const getMovies = async () => {
+    const col = await Movie.find({});
+    res.render('movies', { movies: col });
+    return col;
+  };
+
+  const movies = getMovies();
 });
 
 app.post('/', (req, resp) => {
