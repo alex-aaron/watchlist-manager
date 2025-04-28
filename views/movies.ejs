@@ -33,6 +33,19 @@
       .form-container {
         margin-top: 20px;
       }
+
+      .movies-container {
+        margin-top: 20px;
+      }
+
+      #movie-row {
+        padding: 20px;
+      }
+
+      .movie-card {
+        border-radius: 24% 24% 24% 24% / 45% 44% 41% 40%;
+      }
+
     </style>
   </head>
   <body>
@@ -41,33 +54,36 @@
     </div>
 
     <div class="container movies-container">
-      <div class="row justify-content-center">
-        <div class="col">
-          <h3>Title:</h3>
-          <p>Come and See</p>
-        </div>
-        <div class="col">
-          <h3>Director:</h3>
-          <p>Elem Klimov</p>
-        </div>
-        <div class="col">
-          <h3>Year:</h3>
-          <p>1985</p>
-        </div>
-        <div class="col">
-          <h3>Watched:</h3>
-          <p>False</p>
-        </div>
-        <div class="col">
-          <h3>Where to watch:</h3>
-          <p>Max</p>
+      <div class="card movie-card bg-transparent">
+        <div class="row justify-content-center" id="movie-row">
+          <div class="col">
+            <p class="header">Title:</h3>
+            <p class="body-text">Come and See</p>
+          </div>
+          <div class="col">
+            <p class="header">Director:</h3>
+            <p class="body-text">Elem Klimov</p>
+          </div>
+          <div class="col">
+            <p class="header">Year:</h3>
+            <p class="body-text">1985</p>
+          </div>
+          <div class="col">
+            <p class="header">Watched:</h3>
+            <p class="body-text">False</p>
+          </div>
+          <div class="col">
+            <p class="header">Where to watch:</h3>
+            <p class="body-text">Max</p>
+          </div>
         </div>
       </div>
+      
     </div>
 
 
 
-    <div class="container movies-container">
+    <!-- <div class="container movies-container">
       <div class="card">
         <table class="table table-striped">
           <thead>
@@ -90,7 +106,7 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
     
     
   </body>
