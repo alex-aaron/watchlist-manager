@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
+  
   const getMovies = async () => {
     const col = await Movie.find({});
     res.render('movies', { movies: col });
