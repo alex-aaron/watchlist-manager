@@ -5,11 +5,25 @@
     <title>Movie Tracker</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap" 
+      rel="stylesheet"
+    />  
     <style>
       body {
         padding: 20px;
         background-color: #8EC5FC;
         background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+      }
+
+      .header {
+        font-family: "Source Sans",;
+        font-weight: 700
+      }
+
+      .body-text {
+        font-family: "Roboto"
       }
 
       #title {
@@ -22,9 +36,37 @@
     </style>
   </head>
   <body>
-    <div class="header">
-      <h1 id='title'>Movies</h1>
+    <div class="container">
+      <h1 class="header" id='title'>Movies</h1>
     </div>
+
+    <div class="container movies-container">
+      <div class="row justify-content-center">
+        <div class="col">
+          <h3>Title:</h3>
+          <p>Come and See</p>
+        </div>
+        <div class="col">
+          <h3>Director:</h3>
+          <p>Elem Klimov</p>
+        </div>
+        <div class="col">
+          <h3>Year:</h3>
+          <p>1985</p>
+        </div>
+        <div class="col">
+          <h3>Watched:</h3>
+          <p>False</p>
+        </div>
+        <div class="col">
+          <h3>Where to watch:</h3>
+          <p>Max</p>
+        </div>
+      </div>
+    </div>
+
+
+
     <div class="container movies-container">
       <div class="card">
         <table class="table table-striped">
